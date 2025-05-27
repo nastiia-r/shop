@@ -1,0 +1,36 @@
+.search-header {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  align-items: center;
+  width: 65%;
+}
+
+.search-header input {
+  height: 45px;
+  margin: 0px;
+  border-radius: 5px 0px 0px 5px;
+  border: 1px solid #a59b8b;
+}
+
+.input-search-header {
+  width: 90%;
+}
+
+.button-search-header {
+  width: 10%;
+  margin: 0px;
+  height: 45px;
+  background: #edbf68;
+  border: none;
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+  color: #201e1a;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+}
+
+.search-header * {
+  margin: 0px;
+}

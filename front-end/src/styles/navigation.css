@@ -1,0 +1,27 @@
+.gender-nav {
+  background-color: #5f4e33;
+  display: flex;
+  justify-content: space-around;
+}
+
+.gender-nav a {
+  color: #f3e7d4;
+  text-decoration: none;
+}
+
+.category-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #5f4e33;
+}
+
+.category-item-nav li a {
+  color: #f3e7d4;
+  text-decoration: none;
+}
+
+.category-nav li a {
+  color: #f3e7d4;
+  text-decoration: none;
+}

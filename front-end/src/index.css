@@ -1,0 +1,137 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&family=Merriweather:wght@400;700&display=swap");
+@import "./styles/filter.css";
+@import "./styles/navigation.css";
+@import "./styles/productbyid.css";
+@import "./styles/search.css";
+@import "./styles/header.css";
+@import "./styles/warning.css";
+@import "./styles/cart.css";
+@import "./styles/products.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Merriweather", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*background: linear-gradient(#31220b, #382e1b);
+  background-color: #f1ede1; */
+  background: #faf5f4;
+  color: #f3e7d4;
+  min-height: 100vh;
+}
+
+#shop {
+  width: 80%;
+  margin: 2rem auto;
+}
+
+#shop h2 {
+  font-size: 1.5rem;
+  color: #a59b8b;
+  text-transform: uppercase;
+}
+
+#checkout {
+  animation: fade-slide-in-from-right 0.3s ease-in-out;
+}
+
+#checkout label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#checkout input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+@keyframes fade-slide-in-from-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-slide-in-from-right {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+form * {
+  margin: 10px;
+}
+
+form input {
+  width: 300px;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.home a {
+  display: flex;
+  width: 40%;
+  height: 70%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-color: #d1b68b;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #201e1a;
+  text-shadow: 0 0 0 #d3b17b;
+  transition: all 250ms;
+}
+
+.home a:hover {
+  transform: translate(-2px, -2px);
+}
+
+.a-men {
+  background: url("https://i.mdel.net/i/db/2023/5/1950123/1950123-800w.jpg")
+    no-repeat top;
+  background-size: cover;
+}
+
+.a-women {
+  background: url("https://i.pinimg.com/736x/25/fe/e4/25fee467827428c50dd5b846bbd3728c.jpg")
+    no-repeat top;
+  background-size: cover;
+}
+
+ul {
+  list-style-type: none;
+}

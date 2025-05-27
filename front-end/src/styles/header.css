@@ -1,0 +1,49 @@
+
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 10%;
+    height: 100px;
+  }
+  
+#main-title {
+  display: flex;
+  align-items: center;
+}
+
+
+h1 {
+  text-align: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: #5f4e33;
+  font-size: 45px;
+  padding: 5px;
+  margin: 0;
+}
+
+#main-header .header-button {
+  background: #edbf68;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1.5rem;
+  color: #201e1a;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+#main-header button:hover {
+  background: #f5b744;
+}
+
+.bi {
+  color: #5f4e33;
+
+
+}
+
+button{
+  height: 45px;
+  
+}
