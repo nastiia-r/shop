@@ -106,20 +106,6 @@ function ProductPage() {
       </p>
       <div className="conteiner-product">
         <div className="conteiner-img-product">
-          {product[0]?.images.length > 1 && (
-            <div className="row-img">
-              {product[0]?.images.map((item, index) => (
-                <div className="column-img" key={index}>
-                  <img
-                    className={`demo-img ${index === 0 ? "active" : ""}`}
-                    src={item}
-                    alt={product[0].title}
-                    onClick={() => currentSlide(index + 1)}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
           {product[0]?.images.map((item, index) => (
             <div
               key={index}
@@ -139,41 +125,73 @@ function ProductPage() {
               )}
             </div>
           ))}
+          {product[0]?.images.length > 1 && (
+            <div className="row-img">
+              {product[0]?.images.map((item, index) => (
+                <div className="column-img" key={index}>
+                  <img
+                    className={`demo-img ${index === 0 ? "active" : ""}`}
+                    src={item}
+                    alt={product[0].title}
+                    onClick={() => currentSlide(index + 1)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        <div className="product-description">
-          <h3>{product[0]?.title}</h3>
-          <p>{product[0]?.description}</p>
+        <div className="product-text">
+          <div className="product-header">
+            <h3>{product[0]?.title}</h3>
+            {product[0]?.discountpercentage > 0 && (
+              <div className="product-procentage">
+                -{Math.floor(product[0]?.discountpercentage)}%
+              </div>
+            )}
+          </div>
+
+          <p className="product-sku">({product[0]?.sku.split("-")[0]})</p>
+
+          <p className="product-description">{product[0]?.description}</p>
           {product[0]?.discountpercentage > 0 ? (
             <p className="product-price">
-              <s>{product[0]?.price}</s> {discountPrice}
+              <span> {discountPrice}$</span> <s>{product[0]?.price}$</s>
             </p>
           ) : (
-            <p className="product-price">{product[0]?.price}</p>
+            <p className="product-price">{product[0]?.price}$</p>
           )}
-          <p>Size:</p>
-          <ul>
-            {product.map((item) => (
-              <li key={item.id}>
-                <input
-                  type="radio"
-                  onChange={onChangeValue}
-                  name="size"
-                  id={item.size}
-                  value={item.size}
-                  disabled={item.stock === 0}
-                />
-                <label
-                  htmlFor={item.size}
-                  className={`size-radio ${
-                    item.stock === 0 ? "out-of-stock" : ""
-                  }`}
-                >
-                  {item.size} - {item.stock}
-                </label>
-              </li>
-            ))}
-          </ul>
-          <p>{product[0]?.sku.split("-")[0]}</p>
+          <p className="product-size">Size:</p>
+
+          <div className="section over-hide z-bigger">
+            <div className="container pb-5">
+              <div className="row justify-content-center pb-5">
+                <ul className="col-12 pb-5 product-sizes-list">
+                  {product.map((item) => (
+                    <li key={item.id}>
+                      <input
+                        className="checkbox-tools"
+                        type="radio"
+                        onChange={onChangeValue}
+                        name="size"
+                        id={item.size}
+                        value={item.size}
+                        disabled={item.stock === 0}
+                      />
+                      <label
+                        htmlFor={item.size}
+                        className={`size-radio for-checkbox-tools ${
+                          item.stock === 0 ? "out-of-stock" : ""
+                        }`}
+                      >
+                        {item.size}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <p className="product-actions">
             <button
               onClick={() =>

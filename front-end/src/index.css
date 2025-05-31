@@ -19,15 +19,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   /*background: linear-gradient(#31220b, #382e1b);
   background-color: #f1ede1; */
-  background: #faf5f4;
-  color: #f3e7d4;
+  /* background: #faf5f4;
+  color: #f3e7d4; */
   min-height: 100vh;
 }
 
-#shop {
-  width: 80%;
-  margin: 2rem auto;
-}
+
 
 #shop h2 {
   font-size: 1.5rem;

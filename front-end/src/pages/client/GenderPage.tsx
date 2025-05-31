@@ -54,7 +54,7 @@ export type CategoryItemProps =
 function GenderPage() {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
-  const location = useLocation();
+  /*const location = useLocation();*/
   const [filters, setFilters] = useState<FilterProps>({
     priceFrom: null,
     priceTo: maxPrice,
@@ -139,15 +139,15 @@ function GenderPage() {
     },
   });
 
-  // useEffect(() => {
-  //   setProducts([]);
-  //   setOffset(0);
-  // }, [gender, category, categoryItem, filters]);
-
   useEffect(() => {
     setProducts([]);
     setOffset(0);
-  }, [location.key]);
+  }, [gender, category, categoryItem, filters]);
+
+  // useEffect(() => {
+  //   setProducts([]);
+  //   setOffset(0);
+  // }, [location.key]);
 
   useEffect(() => {
     if (fetchedData) {

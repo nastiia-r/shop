@@ -104,7 +104,3 @@
 #cart-actions button:last-of-type:hover {
   background: #382e1b;
 }
-
-.product-list * {
-  text-decoration-line: none;
-}

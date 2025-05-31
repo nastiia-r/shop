@@ -1,49 +1,98 @@
-
 #main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 10%;
-    height: 100px;
-  }
-  
-#main-title {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 1rem 2%;
+  height: 80px;
 }
 
+#main-title svg {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+#main-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 h1 {
   text-align: center;
   align-items: center;
   text-transform: uppercase;
   color: #5f4e33;
-  font-size: 45px;
+  font-size: 25px;
   padding: 5px;
   margin: 0;
 }
 
 #main-header .header-button {
-  background: #edbf68;
+  background-color: #efcf83;
   border: none;
   border-radius: 5px;
-  padding: 0.5rem 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #201e1a;
   font-size: 1.25rem;
   cursor: pointer;
 }
 
-#main-header button:hover {
-  background: #f5b744;
+#main-header .header-button:hover {
+  background: #edbf68;
+}
+
+#main-header .header-button svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
 }
 
 .bi {
   color: #5f4e33;
-
-
 }
 
-button{
-  height: 45px;
-  
+.header-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 30%;
+}
+
+@media (min-width: 500px) {
+  #main-header {
+    padding: 1rem 5%;
+    height: 100px;
+  }
+
+  .header-navigation {
+    width: clamp(100px, 20vw, 120px);
+  }
+  h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  #main-header .header-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  #main-header .header-button {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  #main-title svg {
+    height: 1.7rem;
+    width: 1.7rem;
+  }
 }

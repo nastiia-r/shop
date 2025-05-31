@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { categoryMen, categoryWomen } from "./Product";
 import { Link } from "react-router-dom";
+import useWindowWidth from "../store/windowWidth";
+import Search from "./Search";
 
 type CategoryProp = {
   id: number;
@@ -18,6 +20,8 @@ const categoryAccessoriesWomen = categoryWomen.slice(12);
 
 function CategoryMenu({ gender }: { gender: "men" | "women" }) {
   const [hover, setHover] = useState<number | null>(null);
+  let widthScrean = useWindowWidth();
+  let isMobile = widthScrean <= 500;
   const categorys: CategoryProp[] =
     gender === "men"
       ? [
@@ -36,22 +40,28 @@ function CategoryMenu({ gender }: { gender: "men" | "women" }) {
         ];
   return (
     <>
-      <p className="gender-nav">
-        <Link to="/women">Women</Link>
-        <Link to="/men">Men</Link>
-      </p>
-      <ul className="category-nav">
-        {categorys.map((item) => (
-          <li
-            key={item.id}
-            onMouseEnter={() => setHover(item.id)}
-            onMouseLeave={() => setHover(null)}
-          >
-            <Link to={`/${gender}/${item.name.toLowerCase()}`}>
-              {item.name}
-            </Link>
-            {hover === item.id && (
-              <ul className="category-item-nav">
+      <div className="category-menu">
+        <p className="gender-nav">
+          <Link to="/women">Women</Link>
+          <Link to="/men">Men</Link>
+        </p>
+        <ul className="category-nav">
+          {categorys.map((item) => (
+            <li
+              key={item.id}
+              onMouseEnter={() => setHover(item.id)}
+              onMouseLeave={() => setHover(null)}
+              className={hover === item.id ? "is-hovered" : ""}
+            >
+              <Link to={`/${gender}/${item.name.toLowerCase()}`}>
+                {item.name}
+              </Link>
+
+              <ul
+                className={`category-item-nav ${
+                  hover === item.id ? "is-open" : ""
+                }`}
+              >
                 {item.categoryName.map((itemCategory, index) => (
                   <li key={index}>
                     <Link
@@ -62,10 +72,11 @@ function CategoryMenu({ gender }: { gender: "men" | "women" }) {
                   </li>
                 ))}
               </ul>
-            )}
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {isMobile && <Search />}
     </>
   );
 }

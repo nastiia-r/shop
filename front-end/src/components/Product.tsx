@@ -76,13 +76,13 @@ export default function Product({
         <div>
           <h3>{title}</h3>
           {discountpercentage > 0 ? (
-            <p className="product-price">
+            <p className="products-price">
               <span>{discountPrice}$</span> <s>{price}$</s>
             </p>
           ) : (
-            <p className="product-price">{price}$</p>
+            <p className="products-price">{price}$</p>
           )}
-          <p className="product-description">{description}</p>
+          <p className="products-description">{description}</p>
         </div>
       </div>
     </article>
