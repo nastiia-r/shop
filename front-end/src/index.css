@@ -24,8 +24,6 @@ body {
   min-height: 100vh;
 }
 
-
-
 #shop h2 {
   font-size: 1.5rem;
   color: #a59b8b;
@@ -74,16 +72,16 @@ body {
 form {
   display: flex;
   flex-direction: column;
-  margin: 30px;
+  /* margin: 30px; */
 }
 
 form * {
-  margin: 10px;
+  margin: 5px;
 }
 
-form input {
+/* form input {
   width: 300px;
-}
+} */
 
 .home {
   display: flex;

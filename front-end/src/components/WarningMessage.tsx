@@ -9,6 +9,7 @@ type WarningProps = {
 export function WarningMessage({ description, level, onClose }: WarningProps) {
   const [progress, setProgress] = useState(100);
   useEffect(() => {
+    setProgress(100); 
     const interval = 10;
     const increment = (100 / 4000) * interval;
 
@@ -23,12 +24,12 @@ export function WarningMessage({ description, level, onClose }: WarningProps) {
     }, interval);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [description, level]);
 
   useEffect(() => {
     const timer = setTimeout(onClose, 4000);
     return () => clearTimeout(timer);
-  }, [onClose]);
+  }, [onClose, description, level]);
 
   return createPortal(
     <div className="warning" onClick={onClose}>
@@ -38,16 +39,18 @@ export function WarningMessage({ description, level, onClose }: WarningProps) {
         open
       >
         <div className="main-warning">
-          <h3>Warning</h3>
+          <h2 style={{ color: level === "height" ? "#FF0000" : "#FF8000" }}>
+            Warning
+          </h2>
           <p>{description}</p>
         </div>
 
-        <div className="progressBarContainer">
+        <div className="progress-bar-container">
           <div
-            className="progressBar"
+            className="progress-bar"
             style={{
               width: `${progress}%`,
-              backgroundColor: level === "height" ? "red" : "orange",
+              backgroundColor: level === "height" ? "#FF0000" : "#FF8000",
             }}
           ></div>
         </div>

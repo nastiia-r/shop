@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getAllProducts, getPrice } from "../../services/shopService";
 import Product, { ProductProps } from "../../components/Product";
 import Header from "../../components/Header";
@@ -14,7 +14,7 @@ import CategoryMenu, {
 } from "../../components/CategoryMenu.tsx";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Filter, { FilterProps } from "../../components/Filter.tsx";
 
 export type GenderProps = "men" | "women";
@@ -58,7 +58,7 @@ function GenderPage() {
   const [filters, setFilters] = useState<FilterProps>({
     priceFrom: null,
     priceTo: maxPrice,
-    size: "",
+    size: [],
     sortBy: "",
     colors: [],
     discount: false,
@@ -70,20 +70,54 @@ function GenderPage() {
   }>();
   const limitOfProducts = 12;
   const [offset, setOffset] = useState<number>(0);
+  const queryClient = useQueryClient();
+  const isInitialFilterLoad = useRef(true);
+  const [currentGender, setCurrentGender] = useState(gender);
+  const [currentCategory, setCurrentCategory] = useState(category);
+  const [currentCategoryItem, setCurrentCategoryItem] = useState(categoryItem);
 
   useEffect(() => {
     const fetchMaxPrice = async () => {
       if (gender) {
         const price = await getPrice(gender, category, categoryItem);
         setMaxPrice(price);
-        setFilters((prev) => ({
-          ...prev,
-          priceTo: price,
-        }));
+        // setFilters((prev) => ({
+        //   ...prev,
+        //   priceTo: price,
+        // }));
+        if (isInitialFilterLoad.current) {
+          setFilters((prev) => ({
+            ...prev,
+            priceTo: price,
+          }));
+          isInitialFilterLoad.current = false;
+        }
+        // setOffset(0);
+        // setProducts([]);
+        // setHasMore(true);
       }
     };
+    //   if (gender && category) fetchMaxPrice();
+    // }, [gender, category, categoryItem]);
+    if (
+      gender !== currentGender ||
+      category !== currentCategory ||
+      categoryItem !== currentCategoryItem
+    ) {
+      isInitialFilterLoad.current = true;
+      setCurrentGender(gender);
+      setCurrentCategory(category);
+      setCurrentCategoryItem(categoryItem);
+    }
     if (gender && category) fetchMaxPrice();
-  }, [gender, category, categoryItem]);
+  }, [
+    gender,
+    category,
+    categoryItem,
+    currentGender,
+    currentCategory,
+    currentCategoryItem,
+  ]);
 
   const isValidCategoryItem = (
     gender: GenderProps,
@@ -122,7 +156,7 @@ function GenderPage() {
       offset,
       category || null,
       categoryItem || null,
-      filters,
+      JSON.stringify(filters),
     ],
     queryFn: async () => {
       if (gender) {
@@ -137,12 +171,30 @@ function GenderPage() {
       }
       return [];
     },
+    // placeholderData: (previousData) => previousData ?? [],
   });
 
   useEffect(() => {
-    setProducts([]);
     setOffset(0);
-  }, [gender, category, categoryItem, filters]);
+    setProducts([]);
+    setHasMore(true);
+    console.log("also clear");
+
+    // }, [ JSON.stringify(filters), queryClient]);
+  }, [gender, category, categoryItem, JSON.stringify(filters)]);
+
+  useEffect(() => {
+    //       setOffset(0);
+    // setProducts([]);
+    setFilters({
+      priceFrom: null,
+      priceTo: maxPrice || null,
+      size: [],
+      sortBy: "",
+      colors: [],
+      discount: false,
+    });
+  }, [gender, category, categoryItem]);
 
   // useEffect(() => {
   //   setProducts([]);
@@ -168,26 +220,20 @@ function GenderPage() {
       //   };
       // });
       setProducts((prev) => [...prev, ...(fetchedData || [])]);
+      if (fetchedData.length < limitOfProducts) {
+        setHasMore(false);
+      }
     }
   }, [fetchedData]);
 
-  useEffect(() => {
-    setFilters({
-      priceFrom: null,
-      priceTo: maxPrice || null,
-      size: "",
-      sortBy: "",
-      colors: [],
-      discount: false,
-    });
-  }, [gender, category, categoryItem]);
+  const [hasMore, setHasMore] = useState(true);
 
   const { ref, inView } = useInView({
     threshold: 0.5,
   });
 
   useEffect(() => {
-    if (inView) setOffset((prev) => prev + limitOfProducts);
+    if (inView && hasMore) setOffset((prev) => prev + limitOfProducts);
   }, [inView]);
 
   if (isError)
@@ -200,9 +246,11 @@ function GenderPage() {
   if (isLoading && !products.length) return <div>Pending...</div>;
 
   function handleFilter(data: FilterProps) {
-    setFilters(data);
     setOffset(0);
-    setProducts([]);
+    setFilters(data);
+    // setProducts([]);
+    // setHasMore(true);
+    console.log("clear");
   }
   return (
     <>
@@ -212,8 +260,17 @@ function GenderPage() {
 
       {category && (
         <div className="filter-conteiner">
-          <h3>{categoryItem ? categoryItem : category}</h3>
-          <Filter maxPrice={maxPrice} data={filters} onFilter={handleFilter} />
+          <h3>
+            {categoryItem
+              ? `FIND YOUR PERFECT ${categoryItem.toUpperCase()}`
+              : `FIND YOUR PERFECT ${category.toUpperCase()}`}
+          </h3>
+          <Filter
+            maxPrice={maxPrice}
+            data={filters}
+            category={category}
+            onFilter={handleFilter}
+          />
         </div>
       )}
 

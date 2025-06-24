@@ -1,6 +1,6 @@
 #shop {
   width: 90%;
-  margin: 2rem auto;
+  margin: 1rem auto;
 }
 
 .product-list * {
@@ -12,7 +12,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
   gap: 1rem;
 }
 
@@ -24,6 +25,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   overflow: hidden;
 }

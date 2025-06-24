@@ -1,29 +1,20 @@
+
 #warning-modal {
   position: relative;
+  z-index: 10;
   bottom: 0;
   right: 0;
   width: 300px;
-  background: #d3b17b;
+  background: #fff7f1;
   padding: 0px;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   animation: fade-slide-in-from-bottom-right 0.3s ease-in-out;
 }
 
-@keyframes fade-slide-in-from-bottom-right {
-  from {
-    opacity: 0;
-    transform: translate(50px, 50px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-}
-
 .main-warning {
-  padding: 15px;
+  padding: 10px;
 }
 
 .warning {
@@ -36,23 +27,41 @@
   display: flex;
 }
 
-#warning-modal h2 {
-  font-size: 1.5rem;
-  color: #4f3807;
-  text-transform: uppercase;
+.main-warning h2{
   margin: 0;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-#warning-modal .progressBarContainer {
+.main-warning p{
+  color: #5f4e33;
+}
+
+#warning-modal .progress-bar-container {
   height: 10px;
-  background-color: #d3b17b;
+  background-color: #fff7f1;
   position: relative;
   overflow: hidden;
   margin-bottom: 0px;
   padding: 0px;
 }
 
-#warning-modal .progressBar {
+#warning-modal .progress-bar {
   height: 100%;
   transition: width 0.1s linear;
+}
+
+/* #warning-modal *{
+  margin: 0;
+} */
+
+@keyframes fade-slide-in-from-bottom-right {
+  from {
+    opacity: 0;
+    transform: translate(50px, 50px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }

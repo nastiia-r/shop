@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Cart from "./Cart.tsx";
 import { useCartSelector } from "../store/hooks.ts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Search from "./Search.tsx";
 import useWindowWidth from "../store/windowWidth.ts";
 
@@ -11,6 +11,7 @@ export default function Header({
 }: {
   hideSearch?: boolean;
 }) {
+   const navigate = useNavigate();
   const [cartIsVisible, setCartIsVisible] = useState(false);
   const cartQuantity = useCartSelector((state) =>
     state.cart.items.reduce((val, item) => val + item.quantity, 0)
@@ -30,7 +31,7 @@ export default function Header({
     <>
       {cartIsVisible && <Cart onClose={handleCloseCartClick} />}
       <header id="main-header">
-        <div id="main-title">
+        <div id="main-title" onClick={()=>navigate('/')}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="33"
@@ -47,20 +48,22 @@ export default function Header({
         {!hideSearch && isNotMobile && <Search />}
 
         <div className="header-navigation">
-          <button onClick={handleOpenCartClick} className="header-button">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-              fill="currentColor"
-              className="bi bi-basket2"
-              viewBox="0 0 16 16"
-            >
-              <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0z" />
-              <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6z" />
-            </svg>
-            {cartQuantity > 0 && ` (${cartQuantity})`}
-          </button>
+          <div className="header-cart-count">
+            <button onClick={handleOpenCartClick} className="header-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                fill="currentColor"
+                className="bi bi-basket2"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4 10a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm3 0a1 1 0 1 1 2 0v2a1 1 0 0 1-2 0z" />
+                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-.623l-1.844 6.456a.75.75 0 0 1-.722.544H3.69a.75.75 0 0 1-.722-.544L1.123 8H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.163 8l1.714 6h8.246l1.714-6z" />
+              </svg>
+            </button>
+            {cartQuantity > 0 && <p>{cartQuantity}</p>}
+          </div>
 
           <Link className="login header-button" to="/verification">
             <svg

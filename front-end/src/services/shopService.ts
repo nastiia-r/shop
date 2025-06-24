@@ -88,7 +88,7 @@ export async function searchProducts(
   limit: number,
   offset: number,
   textSearch: string,
-  categorySearch: "men" | "women" | "all",
+  genderSearch: "men" | "women" | "all",
   filters?: FilterProps
 ): Promise<ProductProps[]> {
   try {
@@ -96,7 +96,7 @@ export async function searchProducts(
 
     url += `?limit=${limit}&offset=${offset}`;
     url += `&t=${encodeURIComponent(textSearch)}`;
-    url += `&c=${encodeURIComponent(categorySearch)}`;
+    url += `&c=${encodeURIComponent(genderSearch)}`;
 
     if (filters) {
       if (filters.priceFrom) url += `&priceFrom=${filters.priceFrom}`;

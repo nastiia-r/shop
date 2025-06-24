@@ -99,8 +99,13 @@ const getAllProducts = async (req, res) => {
     }
 
     if (size) {
-      conditions.push(`size = $${queryParams.length + 1}`);
-      queryParams.push(size);
+      let sizeArray = size.split(",");
+      let sizeConditions = sizeArray
+        .map((_, i) => `size = $${queryParams.length + i + 1}`)
+        .join(" OR ");
+      conditions.push(`(${sizeConditions})`);
+      queryParams.push(...sizeArray);
+
     }
 
     if (colors) {
@@ -193,8 +198,13 @@ const getSearchProducts = async (req, res) => {
     }
 
     if (size) {
-      conditions.push(`size = $${queryParams.length + 1}`);
-      queryParams.push(size);
+      let sizeArray = size.split(",");
+      let sizeConditions = sizeArray
+        .map((_, i) => `size = $${queryParams.length + i + 1}`)
+        .join(" OR ");
+      conditions.push(`(${sizeConditions})`);
+      queryParams.push(...sizeArray);
+
     }
 
     if (colors) {

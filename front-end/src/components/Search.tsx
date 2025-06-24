@@ -1,30 +1,38 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { WarningMessage } from "./WarningMessage";
 
 export type SearchProps = {
-  categorySearch: "men" | "women" | "all";
+  genderSearch: "men" | "women" | "all";
   textSearch: string;
 };
 export default function Search() {
+  const location = useLocation(); 
+
   const [searchDate, setSearchDate] = useState<SearchProps>({
-    categorySearch: "all",
+    genderSearch: "all",
     textSearch: "",
   });
   const [warning, setWarning] = useState<{
     description: string;
     level: string;
   } | null>(null);
+  const [keyWarning, setKeyWarning] = useState(0);
+
   const navigate = useNavigate();
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (searchDate.textSearch !== "") {
+      console.log(location.pathname);
       navigate(
         `/search?t=${encodeURIComponent(
           searchDate.textSearch
-        )}&c=${encodeURIComponent(searchDate.categorySearch)}`
-      );
+        )}&c=${encodeURIComponent(searchDate.genderSearch)}`
+      , {
+        state: {from: location.pathname}
+      });
     } else {
+      setKeyWarning(Date.now());
       setWarning({ description: "Fill in the fields", level: "medium" });
     }
   }
@@ -62,6 +70,7 @@ export default function Search() {
 
       {warning && (
         <WarningMessage
+          key={keyWarning}
           description={warning.description}
           level={warning.level}
           onClose={() => setWarning(null)}

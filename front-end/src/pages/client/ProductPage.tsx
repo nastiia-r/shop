@@ -17,7 +17,7 @@ function ProductPage() {
     description: string;
     level: string;
   } | null>(null);
-
+  const [keyWarning, setKeyWarning] = useState(0);
   const dispatch = useCartDispatch();
   useEffect(() => {
     const fetchProducts = async () => {
@@ -37,10 +37,12 @@ function ProductPage() {
   ) {
     let currentProduct = product.find((item) => item.size === size);
     if (!size) {
+      setKeyWarning(Date.now());
       setWarning({ description: "Choose size", level: "height" });
       return;
     }
     if (!currentProduct) {
+      setKeyWarning(Date.now());
       setWarning({ description: "Out of stock", level: "medium" });
       return;
     }
@@ -87,11 +89,6 @@ function ProductPage() {
   function onChangeValue(event: React.ChangeEvent<HTMLInputElement>) {
     setCurrentSize(event.target.value);
   }
-
-  // useEffect(()=>{
-  //     const timer = setTimeout(()=>{setWarning(null)}, 3000)
-  //     return () => clearTimeout(timer);
-  // }, [warning])
   const discountPrice = calculateDiscountPrice(
     product[0]?.price,
     product[0]?.discountpercentage
@@ -209,6 +206,7 @@ function ProductPage() {
 
           {warning && (
             <WarningMessage
+              key={keyWarning}
               description={warning.description}
               level={warning.level}
               onClose={() => setWarning(null)}
