@@ -2,7 +2,9 @@
   /* z-index: 6; */
   top: 5rem;
   width: 300px;
-  background: #d3b17b;
+  /* background: #d3b17b; */
+    background-color: rgba(255, 247, 241, 0.9);
+
   border: none;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -41,7 +43,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: #fbd392;
+  background: #fff7f1;
   border-radius: 5px;
   font-size: 0.9rem;
 }

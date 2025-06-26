@@ -1,0 +1,145 @@
+.bg-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(0.79turn, #efcf83, #ee3d31);
+  margin: 0;
+  padding: 0;
+}
+
+.verification-form {
+display: flex;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 30px 0;
+  background-color: rgba(255, 247, 241, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.verification-form svg.bi {
+  display: flex;
+  margin: 0 auto;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 20px 0 25px;
+  width: 100%;
+}
+
+.verification-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-change-form {
+  width: 90%;
+  margin: 5px auto;
+
+}
+
+.form-change-form * {
+  display: inline;
+  font-size: 0.8rem;
+  margin: 5px 2px;
+}
+
+.form-change-form p {
+  color: #5f4e33;
+}
+
+.form-change-form button {
+  border: none;
+  border-bottom: 1px #201e1a solid;
+  padding: 0;
+  color: #201e1a;
+  font-size: 0.95rem;
+  cursor: pointer;
+  background: none;
+}
+
+.verification-form button[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  background-color: #efcf83;
+  height: 2.5rem;
+  padding: 0;
+  color: #5f4e33;
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 90%;
+  margin: 5px auto;
+
+}
+
+.verification-form button[type="submit"]:hover{
+ background-color: #edbf68;
+}
+
+.verification-form h1{
+    padding: 0;
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #5f4e33 solid;
+  display: block;
+  width: 80%;
+    
+  padding: 0;
+  font-size: 1rem;
+  color: #5f4e33;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: black;
+}
+
+.form-control label {
+  position: absolute;
+  margin: 0;
+  font-size: 0;
+  top: 0;
+  left: 10%;
+  pointer-events: none;
+}
+
+.form-control label span {
+  display: inline-block;
+  margin: 0;
+  font-size: 1rem;
+  color: #5f4e33;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+      background-color: transparent;
+
+  color: black;
+  transform: translateY(-20px);
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #000; 
+}
+
+
+@media (min-width: 500px){
+.verification-form{
+    width: 465px;
+}
+}
