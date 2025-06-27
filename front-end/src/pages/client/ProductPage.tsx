@@ -3,7 +3,7 @@ import { calculateDiscountPrice, ProductProps } from "../../components/Product";
 import { getProduct } from "../../services/shopService";
 import { GenderProps } from "./GenderPage";
 import { Link, useParams } from "react-router-dom";
-import { useCartDispatch } from "../../store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import { addToCart } from "../../store/cart-slice";
 import Header from "../../components/Header";
 import { WarningMessage } from "../../components/WarningMessage";
@@ -18,7 +18,7 @@ function ProductPage() {
     level: string;
   } | null>(null);
   const [keyWarning, setKeyWarning] = useState(0);
-  const dispatch = useCartDispatch();
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const fetchProducts = async () => {
       if (gender && id) {

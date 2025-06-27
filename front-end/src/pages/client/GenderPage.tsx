@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Filter, { FilterProps } from "../../components/Filter.tsx";
+import { useAppDispatch } from "../../store/hooks.ts";
+import { restore } from "../../store/user-slice.ts";
 
 export type GenderProps = "men" | "women";
 export type CategoryProps = "clothing" | "shoes" | "accessories";
@@ -52,6 +54,8 @@ export type CategoryItemProps =
   | CategoryAccessoriesWomen;
 
 function GenderPage() {
+  const dispatch = useAppDispatch();
+
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [maxPrice, setMaxPrice] = useState<number>(0);
   /*const location = useLocation();*/
@@ -235,6 +239,11 @@ function GenderPage() {
   useEffect(() => {
     if (inView && hasMore) setOffset((prev) => prev + limitOfProducts);
   }, [inView]);
+
+  useEffect(() => {
+    console.log("up")
+    dispatch(restore());
+  }, []);
 
   if (isError)
     return (

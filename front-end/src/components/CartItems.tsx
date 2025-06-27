@@ -3,12 +3,12 @@ import {
   addToCart,
   removeFromCart,
 } from "../store/cart-slice.ts";
-import { useCartDispatch, useCartSelector } from "../store/hooks.ts";
+import { useAppDispatch, useCartSelector } from "../store/hooks.ts";
 import { calculateDiscountPrice } from "./Product.tsx";
 
 export default function CartItems() {
   const cartItems = useCartSelector((state) => state.cart.items);
-  const dispatch = useCartDispatch();
+  const dispatch = useAppDispatch();
 
   const totalPrice = cartItems.reduce((val, item) => {
     let discountPrice = calculateDiscountPrice(
